@@ -41,7 +41,7 @@ class WelcomeScreen extends React.Component {
         >
           <Image
             style={styles.BrandImage}
-            source={require("../assets/pokemon/pika.png")}
+            source={require("../assets/pokemon/25.png")}
           ></Image>
           <Text style={styles.DexTitle}>도감보기</Text>
         </TouchableOpacity>
