@@ -5,10 +5,11 @@ import {
   FlatList,
   View,
   Text,
-  Image,
   StyleSheet
 } from "react-native";
+import Constants from "expo-constants";
 
+import DexList from "../components/DexList";
 import dexImage from "../exports/DexImage";
 
 class CategoryScreen extends React.Component {
@@ -35,14 +36,27 @@ class CategoryScreen extends React.Component {
 
   renderItemByLocal = data => {
     // local 용
-    const imagePathNum = dexImage.dexImage[data.item.id];
     return (
-      <TouchableOpacity style={{ backgroundColor: "transparent" }}>
-        <View style={styles.listItemContainer}>
-          <Text style={styles.pokeItemHeader}>{data.item.ko_name}</Text>
-          <Image source={imagePathNum} style={styles.pokeImage} />
-        </View>
+      <TouchableOpacity
+        onPress={() => this._onPressMoveDetailScreen(data.item)}
+      >
+        <DexList
+          navigation={this.props.navigation}
+          pokemonId={data.item.id}
+          koName={data.item.ko_name}
+          imagePathNumber={dexImage.dexImage[data.item.id]}
+        />
       </TouchableOpacity>
+    );
+  };
+
+  /**
+   * Detail Screen 으로 이동
+   */
+  _onPressMoveDetailScreen = data => {
+    this.props.navigation.navigate(
+      "Detail",
+      Object.assign({}, data, { imagePathNumber: dexImage.dexImage[data.id] })
     );
   };
 
@@ -55,7 +69,7 @@ class CategoryScreen extends React.Component {
         <View style={styles.LoadingWrap}>
           <Text>포켓몬을 찾고 있어요.</Text>
           <Text>조금만 기다려주세요!</Text>
-          <ActivityIndicator />
+          <ActivityIndicator size="large" />
         </View>
       );
     }

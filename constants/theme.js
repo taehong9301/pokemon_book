@@ -5,7 +5,11 @@ const colors = {
   tertiary: "#f1d4d4",
   black: "#323643",
   white: "#FFFFFF",
-  muted: "#9DA3B4"
+  muted: "#9DA3B4",
+
+  // 포켓몬 타입 색상
+  grass: "#a9e34b",
+  poison: "#e599f7"
 };
 
 const sizes = {
