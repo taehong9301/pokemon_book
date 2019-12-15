@@ -29,7 +29,7 @@ class CategoryScreen extends React.Component {
 
   async _get_pokemon_by_local() {
     // 네트워크가 안되는 환경을 위해서 로컬에서 가져온다.
-    const pokemonDex = await require("../assets/json/dex_info1.json");
+    const pokemonDex = await require("../assets/json/dex_info.json");
     const newState = { pokemonList: pokemonDex.pokemon, loading: false };
     return newState;
   }
