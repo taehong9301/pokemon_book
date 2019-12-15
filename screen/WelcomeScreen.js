@@ -10,6 +10,7 @@ import {
 import Constants from "expo-constants";
 
 import { theme } from "../constants";
+import dexImage from "../exports/DexImage";
 
 class WelcomeScreen extends React.Component {
   static navigationOptions = {
@@ -30,9 +31,9 @@ class WelcomeScreen extends React.Component {
         </View>
 
         <View style={styles.GreetinWrap}>
-          <Text style={styles.GreetingComment}>오늘은</Text>
-          <Text style={styles.RecommandPokemon}> 피카츄</Text>
-          <Text style={styles.GreetingComment}> 보고 싶지 않아?</Text>
+          <Text style={styles.GreetingComment}>오늘은 어떤</Text>
+          <Text style={styles.RecommandPokemon}> 포켓몬</Text>
+          <Text style={styles.GreetingComment}>을 살펴볼까?</Text>
         </View>
 
         <TouchableOpacity
@@ -41,12 +42,12 @@ class WelcomeScreen extends React.Component {
         >
           <Image
             style={styles.BrandImage}
-            source={require("../assets/pokemon/25.png")}
+            source={dexImage.dexImage[Math.floor(Math.random() * 20) + 1]}
           ></Image>
           <Text style={styles.DexTitle}>도감보기</Text>
         </TouchableOpacity>
 
-        <Text style={styles.FooterWrap}>Copyright DevHong.</Text>
+        <Text style={styles.FooterWrap}>Developer DevHong. ver 1.0.0.0 </Text>
       </SafeAreaView>
     );
   }
