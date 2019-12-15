@@ -115,7 +115,6 @@ class DetailScreen extends React.Component {
 
 const styles = StyleSheet.create({
   Container: {
-    paddingTop: Constants.statusBarHeight,
     flex: 1,
     alignItems: "center"
   },

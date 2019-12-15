@@ -8,14 +8,12 @@ import {
   TouchableOpacity
 } from "react-native";
 import Constants from "expo-constants";
-import { Ionicons } from "@expo/vector-icons";
 
 import { theme } from "../constants";
 
 class WelcomeScreen extends React.Component {
   static navigationOptions = {
-    headerTitle: () => <Text style={{ flex: 1 }}>Pokemon Book</Text>,
-    headerRight: <Ionicons name="md-checkmark-circle" size={32} color="green" />
+    header: null
   };
 
   _onPressMoveCategoryScreenHandler = () => {

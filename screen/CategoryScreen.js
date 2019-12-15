@@ -41,6 +41,7 @@ class CategoryScreen extends React.Component {
         onPress={() => this._onPressMoveDetailScreen(data.item)}
       >
         <DexList
+          key={data.item.id}
           navigation={this.props.navigation}
           pokemonId={data.item.id}
           koName={data.item.ko_name}
