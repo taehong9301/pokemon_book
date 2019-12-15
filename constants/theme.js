@@ -9,8 +9,18 @@ const colors = {
   muted2: "#f1f3f5",
 
   // 포켓몬 타입 색상
-  grass: "#a9e34b",
-  poison: "#e599f7"
+  normal: "#A8A878",
+  grass: "#78C850",
+  poison: "#A040A0",
+  fairy: "#EE99AC",
+  fire: "#F08030",
+  fly: "#A890F0",
+  earth: "#f08c00",
+  water: "#00aeff",
+  electron: "#F8D030",
+  insect: "#A8B820",
+  ice: "#98D8D8",
+  esper: "#F85888"
 };
 
 const sizes = {

@@ -14,6 +14,7 @@ class DetailScreen extends React.Component {
     super(props);
     const navi = this.props.navigation;
     this.state = {
+      key: navi.getParam("key", 0),
       id: navi.getParam("id", "0"),
       ko_name: navi.getParam("ko_name", "미지의 포켓몬"),
       type: navi.getParam("type", ["알수없는 타입"]),
@@ -35,6 +36,7 @@ class DetailScreen extends React.Component {
 
   render() {
     const {
+      key,
       id,
       ko_name,
       type,
@@ -65,25 +67,49 @@ class DetailScreen extends React.Component {
           <View style={styles.DetailSection}>
             <Text style={styles.DetailSectionName}>타입</Text>
             <View style={styles.TypeTagWrap}>
-              {type.map(e => {
-                let tagColor = styles.TagColorGrass;
-                if (e === "풀") {
+              {type.map((e, i) => {
+                let tagColor = styles.TagColorNormal;
+                if (e === "페어리") {
+                  tagColor = styles.TagColorFairy;
+                } else if (e === "노말") {
+                  tagColor = styles.TagColorNormal;
+                } else if (e === "비행") {
+                  tagColor = styles.TagColorFly;
+                } else if (e === "불꽃") {
+                  tagColor = styles.TagColorFire;
+                } else if (e === "풀") {
                   tagColor = styles.TagColorGrass;
                 } else if (e === "독") {
                   tagColor = styles.TagColorPoison;
+                } else if (e === "물") {
+                  tagColor = styles.TagColorWater;
+                } else if (e === "전기") {
+                  tagColor = styles.TagColorElectron;
+                } else if (e === "땅") {
+                  tagColor = styles.TagColorEarth;
+                } else if (e === "벌레") {
+                  tagColor = styles.TagColorInsect;
+                } else if (e === "얼음") {
+                  tagColor = styles.TagColorIce;
+                } else if (e === "에스퍼") {
+                  tagColor = styles.TagColorEsper;
                 }
-                return <Text style={[styles.TypeTag, tagColor]}>{e}</Text>;
+                return (
+                  <Text key={i} style={[styles.TypeTag, tagColor]}>
+                    {e}
+                  </Text>
+                );
               })}
             </View>
           </View>
 
           <View style={styles.DetailSection}>
             <Text style={styles.DetailSectionName}>설명</Text>
-            {Object.entries(desc).map(([key, value]) => {
+            {Object.entries(desc).map(([version, _desc], i) => {
               return (
-                <View>
-                  <Text>{key} 버전</Text>
-                  <Text style={styles.DetailItemFontSize}>{value}</Text>
+                <View key={i}>
+                  <Text style={styles.DescVersion}>{version} 버전</Text>
+                  <Text style={styles.DetailItemFontSize}>{_desc}</Text>
                 </View>
               );
             })}
@@ -102,10 +128,22 @@ class DetailScreen extends React.Component {
 
           <View style={styles.DetailSection}>
             <Text style={styles.DetailSectionName}>상세정보</Text>
-            <Text style={styles.DetailItemFontSize}>키: {height}m</Text>
-            <Text style={styles.DetailItemFontSize}>몸무게: {weight}kg</Text>
-            <Text style={styles.DetailItemFontSize}>분류: {pokemonClass}</Text>
-            <Text style={styles.DetailItemFontSize}>특징: {specificity}</Text>
+            <View>
+              <Text>키</Text>
+              <Text style={styles.DetailItemFontSize}>{height}m</Text>
+            </View>
+            <View>
+              <Text>몸무게</Text>
+              <Text style={styles.DetailItemFontSize}>{weight}kg</Text>
+            </View>
+            <View>
+              <Text>분류</Text>
+              <Text style={styles.DetailItemFontSize}>{pokemonClass}</Text>
+            </View>
+            <View>
+              <Text>특징</Text>
+              <Text style={styles.DetailItemFontSize}>{specificity}</Text>
+            </View>
           </View>
         </ScrollView>
       </View>
@@ -142,7 +180,9 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   DetailItemFontSize: {
-    ...theme.fonts.h2
+    ...theme.fonts.h2,
+    color: theme.colors.primary,
+    padding: 8
   },
   TypeTagWrap: {
     flexDirection: "row",
@@ -150,14 +190,53 @@ const styles = StyleSheet.create({
   },
   TypeTag: {
     paddingHorizontal: Constants.statusBarHeight,
-    margin: 1,
-    borderRadius: 5
+    paddingVertical: 5,
+    margin: 3,
+    borderRadius: 10,
+    color: theme.colors.white
+  },
+  DescVersion: {
+    paddingVertical: 3,
+    borderRadius: 10,
+    color: theme.colors.muted
+  },
+
+  // 포켓몬 타입 색상 정의
+  TagColorFairy: {
+    backgroundColor: theme.colors.fairy
+  },
+  TagColorNormal: {
+    backgroundColor: theme.colors.normal
   },
   TagColorGrass: {
     backgroundColor: theme.colors.grass
   },
   TagColorPoison: {
     backgroundColor: theme.colors.poison
+  },
+  TagColorFire: {
+    backgroundColor: theme.colors.fire
+  },
+  TagColorFly: {
+    backgroundColor: theme.colors.fly
+  },
+  TagColorEarth: {
+    backgroundColor: theme.colors.earth
+  },
+  TagColorWater: {
+    backgroundColor: theme.colors.water
+  },
+  TagColorElectron: {
+    backgroundColor: theme.colors.electron
+  },
+  TagColorInsect: {
+    backgroundColor: theme.colors.insect
+  },
+  TagColorIce: {
+    backgroundColor: theme.colors.ice
+  },
+  TagColorEsper: {
+    backgroundColor: theme.colors.esper
   }
 });
 export default DetailScreen;

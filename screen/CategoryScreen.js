@@ -29,7 +29,7 @@ class CategoryScreen extends React.Component {
 
   async _get_pokemon_by_local() {
     // 네트워크가 안되는 환경을 위해서 로컬에서 가져온다.
-    const pokemonDex = await require("../assets/json/dex_info.json");
+    const pokemonDex = await require("../assets/json/dex_info1.json");
     const newState = { pokemonList: pokemonDex.pokemon, loading: false };
     return newState;
   }
@@ -41,11 +41,11 @@ class CategoryScreen extends React.Component {
         onPress={() => this._onPressMoveDetailScreen(data.item)}
       >
         <DexList
-          key={data.item.id}
+          key={data.item.key}
           navigation={this.props.navigation}
           pokemonId={data.item.id}
           koName={data.item.ko_name}
-          imagePathNumber={dexImage.dexImage[data.item.id]}
+          imagePathNumber={dexImage.dexImage[data.item.key]}
         />
       </TouchableOpacity>
     );
@@ -57,7 +57,7 @@ class CategoryScreen extends React.Component {
   _onPressMoveDetailScreen = data => {
     this.props.navigation.navigate(
       "Detail",
-      Object.assign({}, data, { imagePathNumber: dexImage.dexImage[data.id] })
+      Object.assign({}, data, { imagePathNumber: dexImage.dexImage[data.key] })
     );
   };
 
@@ -79,7 +79,7 @@ class CategoryScreen extends React.Component {
       <FlatList
         data={pokemonList}
         renderItem={this.renderItemByLocal}
-        keyExtractor={item => item.name}
+        keyExtractor={item => "" + item.key}
       />
     );
   }
