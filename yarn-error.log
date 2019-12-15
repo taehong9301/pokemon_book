@@ -1,30 +1,30 @@
 Arguments: 
-  /usr/local/bin/node /Users/taehongkim/.yarn/bin/yarn.js add expo-liner-gradient
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add react-natvie-admob
 
 PATH: 
-  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Frameworks/Python.framework/Versions/3.7/bin:{/Library/Java/JavaVirtualMachines/jdk-12.0.1.jdk/Contents/Home}/lib/tools.jar:/Library/Java/JavaVirtualMachines/jdk-12.0.1.jdk/Contents/Home/bin:/Library/Scala/scala-2.13.0/bin:/Library/Scala/sbt/bin:/Users/taehongkim/.yarn/bin:/Users/taehongkim/.config/yarn/global/node_modules/.bin
+  C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NGX;C:\Program Files\nodejs\;C:\Program Files (x86)\Yarn\bin\;C:\Users\75385\AppData\Local\Programs\Python\Python38-32\Scripts\;C:\Users\75385\AppData\Local\Programs\Python\Python38-32\;C:\Users\75385\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Bandizip\;C:\Users\75385\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\75385\AppData\Local\GitHubDesktop\bin;C:\Program Files\JetBrains\PyCharm Community Edition 2019.2.5\bin;;C:\dev\sdk\flutter\bin;C:\Users\75385\AppData\Roaming\npm;C:\Users\75385\AppData\Local\Yarn\bin
 
 Yarn version: 
-  1.21.1
+  1.19.2
 
 Node version: 
-  10.16.1
+  12.13.1
 
 Platform: 
-  darwin x64
+  win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/expo-liner-gradient: Not found
-      at Request.params.callback [as _callback] (/Users/taehongkim/.yarn/lib/cli.js:66947:18)
-      at Request.self.callback (/Users/taehongkim/.yarn/lib/cli.js:140665:22)
-      at Request.emit (events.js:198:13)
-      at Request.<anonymous> (/Users/taehongkim/.yarn/lib/cli.js:141637:10)
-      at Request.emit (events.js:198:13)
-      at IncomingMessage.<anonymous> (/Users/taehongkim/.yarn/lib/cli.js:141559:12)
-      at Object.onceWrapper (events.js:286:20)
-      at IncomingMessage.emit (events.js:203:15)
-      at endReadableNT (_stream_readable.js:1145:12)
-      at process._tickCallback (internal/process/next_tick.js:63:19)
+  Error: https://registry.yarnpkg.com/react-natvie-admob: Not found
+      at Request.params.callback [as _callback] (C:\Program Files (x86)\Yarn\lib\cli.js:66036:18)
+      at Request.self.callback (C:\Program Files (x86)\Yarn\lib\cli.js:140586:22)
+      at Request.emit (events.js:210:5)
+      at Request.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:141558:10)
+      at Request.emit (events.js:210:5)
+      at IncomingMessage.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:141480:12)
+      at Object.onceWrapper (events.js:299:28)
+      at IncomingMessage.emit (events.js:215:7)
+      at endReadableNT (_stream_readable.js:1184:12)
+      at processTicksAndRejections (internal/process/task_queues.js:80:21)
 
 npm manifest: 
   {
@@ -39,6 +39,7 @@ npm manifest:
     "dependencies": {
       "expo": "~36.0.0",
       "expo-cli": "^3.11.1",
+      "expo-linear-gradient": "~8.0.0",
       "react": "~16.9.0",
       "react-dom": "~16.9.0",
       "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
@@ -48,6 +49,7 @@ npm manifest:
       "react-native-screens": "^2.0.0-alpha.19",
       "react-native-web": "~0.11.7",
       "react-navigation": "^4.0.10",
+      "react-navigation-animated-switch": "^0.4.0",
       "react-navigation-stack": "^1.10.3"
     },
     "devDependencies": {
@@ -9673,6 +9675,11 @@ Lockfile:
       scheduler "0.15.0"
       stacktrace-parser "^0.1.3"
       whatwg-fetch "^3.0.0"
+  
+  react-navigation-animated-switch@^0.4.0:
+    version "0.4.0"
+    resolved "https://registry.yarnpkg.com/react-navigation-animated-switch/-/react-navigation-animated-switch-0.4.0.tgz#3f89907d2a07d394e6f8ff9ea4f80169590997ac"
+    integrity sha512-cmz6iA5YSjbiJGkeyiBwASNJhSU1xfTlyNs9gkLyv5PgN7FOdb+8hLu4KxbJM1gW3pCpDoeD8EVnOWsl2+w8Fg==
   
   react-navigation-stack@^1.10.3:
     version "1.10.3"
