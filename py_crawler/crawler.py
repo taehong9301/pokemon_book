@@ -12,10 +12,9 @@ warnings.filterwarnings(action='ignore')
 
 
 class PokemonCrawler:
-    def __init__(self, url, json_file_path, key):
-        print("START:", url)
+    def __init__(self, context, json_file_path, key):
         self.key = key
-        self.url = url
+        self.context = context
 
         self.json_file_path = json_file_path
 
@@ -158,20 +157,13 @@ class PokemonCrawler:
             f.write(json_result + ",")
 
     def run(self):
-        rs = requests.get(self.url, verify=False)
-
-        if rs.status_code != 200:
-            print("실패! 읽어오지 못함.")
-            sys.exit()
-
-        context = bs4.BeautifulSoup(rs.text, "html.parser")
 
         # 이름과 도감번호를 가져온다.
-        self.dex, self.name = self.get_pokemon_dex_n_name(context)
+        self.dex, self.name = self.get_pokemon_dex_n_name(self.context)
         if self.dex == -1:
             return
 
-        divs = context.find_all("div")
+        divs = self.context.find_all("div")
         for div in divs:
             div_class_name = div["class"]
             if div_class_name == ["single_wrap"]:
@@ -201,23 +193,46 @@ if __name__ == "__main__":
     json_path = os.path.join(os.getcwd(), "../assets/json")
 
     json_file_path = ""
-    for i in range(200, 966):
-        if i % 50 == 0:
-            json_file_path = os.path.join(json_path, "dex_info{}.json".format((i // 50) + 1))
+    json_file_path = os.path.join(json_path, "dex_info.json")
 
-            with open(json_file_path, "w", encoding="utf-8") as f:
-                f.write("{\"pokemon\": [")
-            assert os.path.exists(json_file_path), "초기 JSON 파일을 생성하지 못했습니다. {}".format(json_file_path)
+    with open(json_file_path, "w", encoding="utf-8") as f:
+        f.write("{\"pokemon\": [")
+    assert os.path.exists(json_file_path), "초기 JSON 파일을 생성하지 못했습니다. {}".format(json_file_path)
+
+    key = 0
+    for i in range(966):
+        # if key % 50 == 0:
+        #     json_file_path = os.path.join(json_path, "dex_info{}.json".format((key // 50) + 1))
+        #
+        #     with open(json_file_path, "w", encoding="utf-8") as f:
+        #         f.write("{\"pokemon\": [")
+        #     assert os.path.exists(json_file_path), "초기 JSON 파일을 생성하지 못했습니다. {}".format(json_file_path)
 
         url = r"https://pokemonkorea.co.kr/pokedex/single/{}".format(i+1)
-        obj = PokemonCrawler(url, json_file_path, i+1)
+
+        rs = requests.get(url, verify=False)
+        if rs.status_code != 200:
+            print("실패! 읽어오지 못함.")
+            sys.exit()
+
+        context = bs4.BeautifulSoup(rs.text, "html.parser")
+        if context.h1 is None:
+            continue
+        else:
+            key += 1
+
+        print(key, "START:", url)
+
+        obj = PokemonCrawler(context, json_file_path, key)
         obj.run()
 
-        if i % 50 == 49:
-            with open(json_file_path, "r", encoding="utf-8") as fr:
-                text = fr.read()[:-1] + "]}"
-                with open(json_file_path, "w", encoding="utf-8") as f:
-                    f.write(text)
+        # if key % 50 == 49:
+        #     with open(json_file_path, "r", encoding="utf-8") as fr:
+        #         text = fr.read()[:-1] + "]}"
+        #         with open(json_file_path, "w", encoding="utf-8") as f:
+        #             f.write(text)
 
-    with open(json_file_path, "a", encoding="utf-8") as f:
-        f.write("]}")
+    with open(json_file_path, "r", encoding="utf-8") as fr:
+        text = fr.read()[:-1] + "]}"
+        with open(json_file_path, "w", encoding="utf-8") as f:
+            f.write(text)
