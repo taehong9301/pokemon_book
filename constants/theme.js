@@ -7,6 +7,7 @@ const colors = {
   white: "#FFFFFF",
   muted: "#9DA3B4",
   muted2: "#f1f3f5",
+  muted3: "#f8f9fa",
 
   // 포켓몬 타입 색상
   normal: "#A8A878",

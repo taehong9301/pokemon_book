@@ -8,21 +8,29 @@ import {
   StyleSheet
 } from "react-native";
 import Constants from "expo-constants";
+import { Ionicons } from "@expo/vector-icons";
+import { AdMobBanner } from "expo-ads-admob";
 
 import DexList from "../components/DexList";
 import dexImage from "../exports/DexImage";
+import { ScrollView } from "react-native-gesture-handler";
+import { theme } from "../constants";
 
 class CategoryScreen extends React.Component {
+  static navigationOptions = {
+    header: null
+  };
   constructor(props) {
     super(props);
     this.state = {
+      page: 0,
+      listLength: 0,
       pokemonList: [],
       loading: true
     };
   }
 
   async componentDidMount() {
-    // const newState = await this._get_pokemon_by_api();
     const newState = await this._get_pokemon_by_local();
     this.setState(newState);
   }
@@ -30,7 +38,11 @@ class CategoryScreen extends React.Component {
   async _get_pokemon_by_local() {
     // 네트워크가 안되는 환경을 위해서 로컬에서 가져온다.
     const pokemonDex = await require("../assets/json/dex_info.json");
-    const newState = { pokemonList: pokemonDex.pokemon, loading: false };
+    const newState = {
+      pokemonList: pokemonDex.pokemon,
+      listLength: pokemonDex.pokemon.length,
+      loading: false
+    };
     return newState;
   }
 
@@ -62,7 +74,7 @@ class CategoryScreen extends React.Component {
   };
 
   render() {
-    const { pokemonList, loading } = this.state;
+    const { page, listLength, pokemonList, loading } = this.state;
 
     // 로딩중...
     if (loading) {
@@ -76,41 +88,68 @@ class CategoryScreen extends React.Component {
     }
 
     return (
-      <FlatList
-        data={pokemonList}
-        renderItem={this.renderItemByLocal}
-        keyExtractor={item => "" + item.key}
-      />
-    );
-  }
+      <View style={styles.Container}>
+        <ScrollView>
+          <AdMobBanner
+            bannerSize="smartBannerPortrait"
+            adUnitID="ca-app-pub-9462926197232794/4921520930"
+            servePersonalizedAds // true or false
+            onDidFailToReceiveAdWithError={e => console.log(e)}
+          />
+          <View>
+            <FlatList
+              data={pokemonList.slice(page, page + 30)}
+              renderItem={this.renderItemByLocal}
+              keyExtractor={item => "" + item.key}
+            />
+          </View>
+        </ScrollView>
 
-  ////
-  // 이건 좀 생각해봐야 할거 같다.
-  async _get_pokemon_by_api() {
-    // api 를 이용해서 값을 가져온다. (영문)
-    const pokemonApiCall = await fetch("https://pokeapi.co/api/v2/pokemon/");
-    const pokemon = await pokemonApiCall.json();
-    const newState = { pokemonList: pokemon.results, loading: false };
-    return newState;
-  }
-  renderItemByApi(data) {
-    // api 용
-    return (
-      <TouchableOpacity>
-        <View style={styles.listItemContainer}>
-          <Text style={styles.pokeItemHeader}>{data.item.name}</Text>
-          {/* <Image source={{ uri: data.item.url }} style={styles.pokeImage} /> */}
+        <View style={styles.BottomButtonGroup}>
+          <TouchableOpacity
+            style={styles.BottomButton}
+            onPress={() => {
+              if (page >= 30) this.setState({ page: page - 30 });
+            }}
+          >
+            <Text style={styles.BottomButtonText}>이전</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.BottomButton}
+            onPress={() => {
+              if (page <= listLength - 30) this.setState({ page: page + 30 });
+            }}
+          >
+            <Text style={styles.BottomButtonText}>다음</Text>
+          </TouchableOpacity>
         </View>
-      </TouchableOpacity>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  Container: {
+    flex: 1,
+    paddingTop: Constants.statusBarHeight
+  },
   LoadingWrap: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center"
+  },
+  BottomButtonGroup: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-around"
+  },
+  BottomButton: {
+    flex: 1,
+    backgroundColor: theme.colors.muted3,
+    paddingVertical: 15
+  },
+  BottomButtonText: {
+    textAlign: "center"
   }
 });
 

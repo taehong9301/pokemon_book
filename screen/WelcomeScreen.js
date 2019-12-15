@@ -42,7 +42,7 @@ class WelcomeScreen extends React.Component {
         >
           <Image
             style={styles.BrandImage}
-            source={dexImage.dexImage[Math.floor(Math.random() * 20) + 1]}
+            source={dexImage.dexImage[Math.floor(Math.random() * 924) + 1]}
           ></Image>
           <Text style={styles.DexTitle}>도감보기</Text>
         </TouchableOpacity>

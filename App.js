@@ -9,8 +9,6 @@ import {
 } from "react-native";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
-import createAnimatedSwitchNavigator from "react-navigation-animated-switch";
-import { Transition } from "react-native-reanimated";
 
 import WelcomeScreen from "./screen/WelcomeScreen";
 import CategoryScreen from "./screen/CategoryScreen";
