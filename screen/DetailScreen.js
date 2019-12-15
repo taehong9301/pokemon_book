@@ -93,6 +93,16 @@ class DetailScreen extends React.Component {
                   tagColor = styles.TagColorIce;
                 } else if (e === "에스퍼") {
                   tagColor = styles.TagColorEsper;
+                } else if (e === "격투") {
+                  tagColor = styles.TagColorFight;
+                } else if (e === "바위") {
+                  tagColor = styles.TagColorStone;
+                } else if (e === "악") {
+                  tagColor = styles.TagColorDark;
+                } else if (e === "드래곤") {
+                  tagColor = styles.TagColorDragon;
+                } else if (e === "고스트") {
+                  tagColor = styles.TagColorGhost;
                 }
                 return (
                   <Text key={i} style={[styles.TypeTag, tagColor]}>
@@ -237,6 +247,21 @@ const styles = StyleSheet.create({
   },
   TagColorEsper: {
     backgroundColor: theme.colors.esper
+  },
+  TagColorFight: {
+    backgroundColor: theme.colors.fight
+  },
+  TagColorStone: {
+    backgroundColor: theme.colors.stone
+  },
+  TagColorDark: {
+    backgroundColor: theme.colors.dark
+  },
+  TagColorDragon: {
+    backgroundColor: theme.colors.dragon
+  },
+  TagColorGhost: {
+    backgroundColor: theme.colors.ghost
   }
 });
 export default DetailScreen;

@@ -17,11 +17,16 @@ const colors = {
   fire: "#F08030",
   fly: "#A890F0",
   earth: "#f08c00",
+  stone: "#B8A038",
   water: "#00aeff",
   electron: "#F8D030",
   insect: "#A8B820",
   ice: "#98D8D8",
-  esper: "#F85888"
+  esper: "#F85888",
+  fight: "#C03028",
+  dark: "#705848",
+  dragon: "#7038F8",
+  ghost: "#705898"
 };
 
 const sizes = {
