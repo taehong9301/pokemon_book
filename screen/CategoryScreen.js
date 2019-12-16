@@ -16,10 +16,13 @@ import dexImage from "../exports/DexImage";
 import { ScrollView } from "react-native-gesture-handler";
 import { theme } from "../constants";
 
+const BANNER_ID = "ca-app-pub-9462926197232794/4921520930";
+
 class CategoryScreen extends React.Component {
   static navigationOptions = {
     header: null
   };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -92,7 +95,8 @@ class CategoryScreen extends React.Component {
         <ScrollView>
           <AdMobBanner
             bannerSize="smartBannerPortrait"
-            adUnitID="ca-app-pub-9462926197232794/4921520930"
+            adUnitID={BANNER_ID}
+            testDeviceID="EMULATOR"
             servePersonalizedAds // true or false
             onDidFailToReceiveAdWithError={e => console.log(e)}
           />

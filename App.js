@@ -1,12 +1,4 @@
 import React from "react";
-import Constants from "expo-constants";
-import {
-  View,
-  Text,
-  StyleSheet,
-  ToastAndroid,
-  BackHandler
-} from "react-native";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 

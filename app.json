@@ -21,7 +21,10 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.tistory.hongku.pokemonbook"
+      "package": "com.tistory.hongku.pokemonbook",
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-9462926197232794~7225579635"
+      }
     }
   }
 }
